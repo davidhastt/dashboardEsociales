@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combobox Dinámico</title>
+  <script>
+    // Función para cargar datos del archivo JSON
+    async function cargarMunicipios() {
+      try {
+        // Fetch al archivo JSON
+        const respuesta = await fetch('municipios.json');
+        const datos = await respuesta.json();
+
+        // Obtener referencia al select (combobox)
+        const comboBox = document.getElementById('municipios');
+
+        // Llenar el combobox con datos del JSON
+        datos.forEach(municipio => {
+          const option = document.createElement('option');
+          option.value = municipio.CVE_MUN; // Clave del municipio como "value"
+          option.textContent = municipio.NOMGEO; // Nombre del municipio como texto visible
+          comboBox.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Error al cargar el archivo JSON:', error);
+      }
+    }
+
+    // Ejecutar la función cuando la página se cargue
+    window.onload = cargarMunicipios;
+  </script>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Selecciona un Municipio</h1>
+      <div class="field">
+        <label class="label">Municipios</label>
+        <div class="control">
+          <!-- ComboBox vacío que será llenado dinámicamente -->
+          <select id="municipios" class="select">
+            <option value="" disabled selected>Elige un municipio</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

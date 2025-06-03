@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIG economia social</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>  
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+ 
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/modules/marker-clusters.js"></script>
+<script src="https://code.highcharts.com/modules/coloraxis.js"></script>
+<script src="https://code.highcharts.com/maps/modules/accessibility.js"></script>
+
+
+
+</head>
+<style>
+#contenedorClusters {
+    min-width: 310px;
+    max-width: 700px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+
+
+
+  #map { height: 340px; }
+  #mapMuns { height: 340px; }
+
+
+
+  #container {
+    height: 400px;
+  }
+
+  #containerB {
+    height: 400px;
+  }
+
+.highcharts-figure,
+.highcharts-data-table table {
+    min-width: 310px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+.highcharts-description {
+    margin: 0.3rem 10px;
+}
+</style>
+<body>
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <p class="title">
+        SEDECO
+      </p>
+      <br>
+      <p class="subtitle">
+        uaem
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="columns">
+      <aside class="column is-one-quarter">
+        <nav class="menu">
+          <p class="menu-label">General</p>
+          <ul class="menu-list">
+            <li><a class="is-active">Inicio</a></li>
+            <li><a>Captura</a></li>
+            <li><a>Visualización</a></li>
+          </ul>
+          <p class="menu-label">Reportes</p>
+          <ul class="menu-list">
+            <li><a>Mensuales</a></li>
+            <li><a>Anuales</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="column">
+        <div class="box">
+          <h2 class="title is-4">Sistema de información geográfica de economia social</h2>
+          <p>Este es el sistema de información geográfica de empresas sociales del estado de México.</p>
+        </div>
+        <div class="box">
+          <h3 class="title is-5">Selecciona una opción</h3>
+          <form>
+            <div class="field">
+              <label class="label">Opciones</label>
+              <div class="control">
+                <div class="select">
+                    <select id="municipios" class="select">
+                        <option value="" disabled selected>Elige un municipio</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button class="button is-primary" type="submit">Enviar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+
+          <div id="parrafo" class="columns is-multiline">
+            <div class="column is-one-third">
+                <div class="box has-text-centered">
+                  <p class="title is-5">Uicacion a nivel nacional</p>
+                  <br>
+
+                    <div id="map"></div>
+                      <p class="subtitle is-6" id="totUnidades">0.0</p>
+                    
+                </div>
+            </div>
+         
+            
+
+          
+            <div class="column is-one-third">
+                <div class="box has-text-centered">
+                  <p class="title is-5">Empresas por municipio</p>
+                  <br>
+
+                  
+                  <div id="containerB"></div>
+                      <p class="subtitle is-6" id="totUnidades">0.0</p>
+                    
+                </div>
+            </div>
+          
+          
+          
+
+          
+            <div class="column is-one-third">
+                <div class="box has-text-centered">
+                  <p class="title is-5">Municipios</p>
+                  <br>
+
+                  <div id="mapMuns"></div>
+                  <p class="subtitle is-6" id="totUnidades">0.0</p>
+                    
+                </div>
+            </div>
+          </div>          
+
+
+
+
+          <div id="parrafo" class="columns is-multiline">
+            <div class="column is-one-third">
+                <div class="box has-text-centered">
+                  <p class="title is-5">Piramide poblacional</p>
+                  <br>
+
+                  <figure class="highcharts-figure">
+                    <div id="container"></div>
+                    <p class="highcharts-description">Composición de la población por rangos de edades</p>
+                  </figure>
+                      <p class="subtitle is-6" id="totUnidades">0.0</p>
+                    
+                </div>
+            </div>
+                     
+
+
+            
+
+          
+            <div class="column is-one-third">
+                <div class="box has-text-centered">
+                  <p class="title is-5">Generos</p>
+                  <br>
+
+                  <figure class="highcharts-figure">
+                    <div id="containerGen"></div>
+                    <p class="highcharts-description">
+                        All color options in Highcharts can be defined as gradients or patterns.
+                        In this chart, a gradient fill is used for decorative effect in a pie
+                        chart.
+                    </p>
+                </figure>
+
+
+                  <p class="subtitle is-6" id="totUnidades">0.0</p>
+                    
+                </div>
+            </div>
+
+
+
+
+            <div class="column is-one-third">
+              <div class="box has-text-centered">
+                <p class="title is-5">Ubicación</p>
+                <br>
+
+                <div id="containerXY"></div>
+
+
+                <p class="subtitle is-6" id="totUnidades">0.0</p>
+                  
+              </div>
+          </div>            
+
+
+
+          </div>
+
+
+
+
+
+              
+
+        </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+<script>
+
+(async () => {
+
+const topology = await fetch(
+    'https://code.highcharts.com/mapdata/custom/europe.topo.json'
+).then(response => response.json());
+
+const data = await fetch(
+    'https://www.highcharts.com/samples/data/european-train-stations-near-airports.json'
+).then(response => response.json());
+
+Highcharts.mapChart('contenedorClusters', {
+    chart: {
+        map: topology
+    },
+    title: {
+        text: 'European Train Stations Near Airports',
+        align: 'left'
+    },
+    subtitle: {
+        text: 'Source: <a href="https://github.com/trainline-eu/stations">' +
+                'github.com/trainline-eu/stations</a>',
+        align: 'left'
+    },
+    mapNavigation: {
+        enabled: true
+    },
+    tooltip: {
+        headerFormat: '',
+        pointFormat: '<b>{point.name}</b><br>Lat: {point.lat:.2f}, Lon: ' +
+            '{point.lon:.2f}'
+    },
+    colorAxis: {
+        min: 0,
+        max: 20
+    },
+    plotOptions: {
+        mappoint: {
+            cluster: {
+                enabled: true,
+                allowOverlap: false,
+                animation: {
+                    duration: 450
+                },
+                layoutAlgorithm: {
+                    type: 'grid',
+                    gridSize: 70
+                },
+                zones: [{
+                    from: 1,
+                    to: 4,
+                    marker: {
+                        radius: 13
+                    }
+                }, {
+                    from: 5,
+                    to: 9,
+                    marker: {
+                        radius: 15
+                    }
+                }, {
+                    from: 10,
+                    to: 15,
+                    marker: {
+                        radius: 17
+                    }
+                }, {
+                    from: 16,
+                    to: 20,
+                    marker: {
+                        radius: 19
+                    }
+                }, {
+                    from: 21,
+                    to: 100,
+                    marker: {
+                        radius: 21
+                    }
+                }]
+            }
+        }
+    },
+    series: [{
+        name: 'Europe',
+        accessibility: {
+            exposeAsGroupOnly: true
+        },
+        borderColor: '#A0A0A0',
+        nullColor: 'rgba(177, 244, 177, 0.5)',
+        showInLegend: false
+    }, {
+        type: 'mappoint',
+        enableMouseTracking: true,
+        accessibility: {
+            point: {
+                descriptionFormat: '{#if isCluster}' +
+                        'Grouping of {clusterPointsAmount} points.' +
+                        '{else}' +
+                        '{name}, country code: {country}.' +
+                        '{/if}'
+            }
+        },
+        colorKey: 'clusterPointsAmount',
+        name: 'Cities',
+        data: data,
+        color: Highcharts.getOptions().colors[5],
+        marker: {
+            lineWidth: 1,
+            lineColor: '#fff',
+            symbol: 'mapmarker',
+            radius: 8
+        },
+        dataLabels: {
+            verticalAlign: 'top'
+        }
+    }]
+});
+
+})();
+
+
+
+
+
+
+
+
+function graficaGeneros(){
+
+  Highcharts.setOptions({
+    colors: Highcharts.getOptions().colors.map(function (color) {
+        return {
+            radialGradient: {
+                cx: 0.5,
+                cy: 0.3,
+                r: 0.7
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    })
+});
+
+// Build the chart
+Highcharts.chart('containerGen', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Representación de los generos en un pie'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<span style="font-size: 1.2em"><b>{point.name}</b>' +
+                    '</span><br>' +
+                    '<span style="opacity: 0.6">{point.percentage:.1f} ' +
+                    '%</span>',
+                connectorColor: 'rgba(128,128,128,0.5)'
+            }
+        }
+    },
+    series: [{
+        name: 'Share',
+        data: [
+            { name: 'Masculino', y: 4780 },
+            { name: 'Femenino', y: 4800 },
+            { name: 'No binario', y: 420 },
+        ]
+    }]
+});
+
+}
+
+
+
+function barras(){
+  Highcharts.chart('containerB', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Economia social'
+    },
+    subtitle: {
+        text: 'Source: <a ' +
+            'href="https://en.wikipedia.org/wiki/List_of_continents_and_continental_subregions_by_population"' +
+            'target="_blank">Wikipedia.org</a>'
+    },
+    xAxis: {
+        categories: ['Africa', 'America', 'Asia', 'Europe'],
+        title: {
+            text: null
+        },
+        gridLineWidth: 1,
+        lineWidth: 0
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Population (millions)',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        },
+        gridLineWidth: 0
+    },
+    tooltip: {
+        valueSuffix: ' millions'
+    },
+    plotOptions: {
+        bar: {
+            borderRadius: '50%',
+            dataLabels: {
+                enabled: true
+            },
+            groupPadding: 0.1
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'Year 1990',
+        data: [632, 727, 3202, 721]
+    }, {
+        name: 'Year 2000',
+        data: [814, 841, 3714, 726]
+    }, {
+        name: 'Year 2021',
+        data: [1393, 1031, 4695, 745]
+    }]
+});  
+}
+
+
+function piramide(){
+// Custom template helper
+Highcharts.Templating.helpers.abs = value => Math.abs(value);
+
+// Age categories
+const categories = [
+    '0-4', '5-9', '10-14', '15-19', '20-24', '25-29', '30-34', '35-40', '40-45',
+    '45-49', '50-54', '55-59', '60-64', '65-69', '70-74', '75-79', '80-84',
+    '80+'
+];
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Piramide poblacional estado de México'
+    },
+    subtitle: {
+        text: 'Source: <a ' +
+            'href="https://countryeconomy.com/demography/population-structure/andorra"' + 'target="_blank">countryeconomy.com</a>'
+    },
+    accessibility: {
+        point: {
+            valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+        }
+    },
+    xAxis: [{
+        categories: categories,
+        reversed: false,
+        labels: {
+            step: 1
+        },
+        accessibility: {
+            description: 'Age (male)'
+        }
+    }, { // mirror axis on right side
+        opposite: true,
+        reversed: false,
+        categories: categories,
+        linkedTo: 0,
+        labels: {
+            step: 1
+        },
+        accessibility: {
+            description: 'Age (female)'
+        }
+    }],
+    yAxis: {
+        title: {
+            text: null
+        },
+        labels: {
+            format: '{abs value}%'
+        },
+        accessibility: {
+            description: 'Percentage population',
+            rangeDescription: 'Range: 0 to 5%'
+        }
+    },
+
+    plotOptions: {
+        series: {
+            stacking: 'normal',
+            borderRadius: '50%'
+        }
+    },
+
+    tooltip: {
+        format: '<b>{series.name}, age {point.category}</b><br/>' +
+            'Population: {(abs point.y):.2f}%'
+    },
+
+    series: [{
+        name: 'Male',
+        data: [
+            -1.38, -2.09, -2.45, -2.71, -2.97,
+            -3.69, -4.04, -3.81, -4.19, -4.61,
+            -4.56, -4.21, -3.53, -2.55, -1.82,
+            -1.46, -0.78, -0.71
+        ]
+    }, {
+        name: 'Female',
+        data: [
+            1.35, 1.98, 2.43, 2.39, 2.71,
+            3.02, 3.50, 3.52, 4.03, 4.40,
+            4.17, 3.88, 3.29, 2.42, 1.80,
+            1.39, 0.99, 1.15
+        ]
+    }]
+});  
+}
+
+
+
+
+
+
+
+
+function crearMapaMuns(i){
+ const map = L.map('mapMuns');
+
+const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+
+  // Cargar el archivo GeoJSON desde localhost
+  fetch('https://geografia.mx/assets/geojson/municipios.json') // Cambia la ruta según tu archivo
+      .then(response => response.json())
+      .then(data => {
+          // Filtrar y obtener un feature específico
+          const singleFeature = L.geoJSON(data, {
+              filter: feature => feature.properties.CVE_ENT === i, // Cambia "FeatureEspecifico" según la propiedad
+              style: {
+                  color: 'blue', // Estilo del feature
+                  weight: 2
+              }
+          });
+
+          // Agregar el feature filtrado al mapa
+          singleFeature.addTo(map);
+
+          // Centrar el mapa en el feature
+          map.fitBounds(singleFeature.getBounds());
+      })
+      .catch(error => {
+          console.error('Error al cargar el archivo GeoJSON:', error);
+      });
+
+}
+
+
+
+
+function crearMapaEdo(CVE_ENT){
+ const map = L.map('map');
+
+const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+
+  // Cargar el archivo GeoJSON desde localhost
+  fetch('https://geografia.mx/assets/geojson/estados.json') // Cambia la ruta según tu archivo
+      .then(response => response.json())
+      .then(data => {
+          // Filtrar y obtener un feature específico
+          const singleFeature = L.geoJSON(data, {
+              filter: feature => feature.properties.CVE_ENT === CVE_ENT, // Cambia "FeatureEspecifico" según la propiedad
+              style: {
+                  color: 'red', // Estilo del feature
+                  weight: 2
+              }
+          });
+
+          // Agregar el feature filtrado al mapa
+          singleFeature.addTo(map);
+
+          // Centrar el mapa en el feature
+          map.fitBounds(singleFeature.getBounds());
+      })
+      .catch(error => {
+          console.error('Error al cargar el archivo GeoJSON:', error);
+      });
+}
+
+
+
+async function loadCBX(CVE_ENT){
+
+  try {
+        // Realizar fetch al archivo GeoJSON
+        const respuesta = await fetch('https://geografia.mx/assets/geojson/municipios.json');
+        const geojson = await respuesta.json(); // Convertir la respuesta a JSON
+
+        // Obtener referencia al combobox
+        const comboBox = document.getElementById('municipios');
+
+        // Filtrar las características para encontrar "Monterrey"
+        const muns = geojson.features.filter(feature => feature.properties.CVE_ENT === CVE_ENT);
+
+        // Llenar el combobox con el resultado filtrado
+        muns.forEach(feature => {
+          const option = document.createElement('option');
+          option.value = feature.properties.CVE_MUN; // Asignar el "id" como valor
+          option.textContent = feature.properties.NOMGEO; // Mostrar el "nombre"
+          comboBox.appendChild(option);
+        });
+
+        const totUnidades = document.getElementById('totUnidades');
+          // Cambiar el contenido del elemento que muestra el total de municipios          
+          totUnidades.textContent = muns.length;         
+
+
+
+
+      } catch (error) {
+        console.error('Error al cargar el archivo GeoJSON:', error);
+      }
+}
+
+// Ejecutar la función cuando la página se cargue
+
+window.onload=loadCBX("15");
+window.onload = crearMapaEdo("15");
+window.onload = crearMapaMuns("15");
+window.onload = piramide();
+window.onload = barras();
+window.onload = graficaGeneros();
+
+
+</script>
+</html>
