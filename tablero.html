@@ -39,12 +39,14 @@
 
 
 
-  #container {
-    height: 400px;
+  #piramide {
+    height: 500px;
+    max-width: 100%
   }
 
-  #containerB {
-    height: 400px;
+  #graficaXmunicipio {
+    height: 600px;
+    width: 100%
   }
 
 .highcharts-figure,
@@ -145,26 +147,91 @@
           <h2 class="title is-4">Sistema de información geográfica de economia social</h2>
           <p>Este es el sistema de información geográfica de empresas sociales del estado de México.</p>
         </div>
-        <div class="box">
-          <h3 class="title is-5">Selecciona una opción</h3>
-          <form>
-            <div class="field">
-              <label class="label">Opciones</label>
-              <div class="control">
-                <div class="select">
-                    <select id="municipios" class="select">
-                        <option value="" disabled selected>Elige un municipio</option>
-                  </select>
+
+          <div id="parrafo" class="columns is-multiline">
+            <div class="column is-one-third">
+                <div class="box has-text-centered">
+
+
+                <h3 class="title is-5">Selecciona un municipio</h3>
+                <form>
+                    <div class="field">                    
+                    <div class="control">
+                        <div class="select">
+                            <select id="municipios" class="select">
+                                <option value="" disabled selected>Entidad completa</option>
+                        </select>
+                        </div>
+                    </div>
+                    </div>
+
+                </form>                    
+
+                    
                 </div>
-              </div>
             </div>
-            <div class="field">
-              <div class="control">
-                <button class="button is-primary" type="submit">Enviar</button>
-              </div>
+         
+            
+
+          
+            <div class="column is-one-third">
+                <div class="box has-text-centered">                    
+                    <h3 class="title is-5">Total de empresas registradas</h3>
+                    <br>
+                    <h2 class="subtitle">0</h2>                    
+                </div>
             </div>
-          </form>
-        </div>
+          
+          
+          
+
+          
+            <div class="column is-one-third">
+                <div class="box has-text-centered">                    
+                    <h3 class="title is-5">Total empresas en INEGI</h3>
+                    <br>
+                    <h2 class="subtitle">0</h2>                    
+                </div>
+            </div>
+        </div> 
+        
+        
+
+
+
+
+          <div id="parrafo" class="columns is-multiline">
+            <div class="column is-one-third">
+                <div class="box has-text-centered">                    
+                    <h3 class="title is-5">Total de personas beneficiadas</h3>
+                    <br>
+                    <h2 class="subtitle">0</h2>                    
+                </div>
+            </div>
+         
+            
+
+          
+            <div class="column is-one-third">
+                <div class="box has-text-centered">                    
+                    <h3 class="title is-5">Hombres</h3>
+                    <br>
+                    <h2 class="subtitle">0</h2>                    
+                </div>
+            </div>
+          
+          
+          
+
+          
+            <div class="column is-one-third">
+                <div class="box has-text-centered">                    
+                    <h3 class="title is-5">Mujeres</h3>
+                    <br>
+                    <h2 class="subtitle">0</h2>                    
+                </div>
+            </div>
+        </div>         
 
 
 
@@ -178,22 +245,23 @@
                       <p class="subtitle is-6" id="totUnidades">0.0</p>
                     
                 </div>
-            </div>
-         
-            
+            </div>       
 
-          
+            
             <div class="column is-one-third">
                 <div class="box has-text-centered">
-                  <p class="title is-5">Empresas por municipio</p>
+                  <p class="title is-5">Generos</p>
                   <br>
 
-                  
-                  <div id="containerB"></div>
-                      <p class="subtitle is-6" id="totUnidades">0.0</p>
+                  <figure class="highcharts-figure">
+                    <div id="containerGen"></div>
+                </figure>
+
+
+                  <p class="subtitle is-6" id="totUnidades">0.0</p>
                     
                 </div>
-            </div>
+            </div>            
           
           
           
@@ -215,13 +283,13 @@
 
 
           <div id="parrafo" class="columns is-multiline">
-            <div class="column is-one-third">
+            <div class="column is-full">
                 <div class="box has-text-centered">
                   <p class="title is-5">Piramide poblacional</p>
                   <br>
 
                   <figure class="highcharts-figure">
-                    <div id="container"></div>
+                    <div id="piramide"></div>
                     <p class="highcharts-description">Composición de la población por rangos de edades</p>
                   </figure>
                       <p class="subtitle is-6" id="totUnidades">0.0</p>
@@ -229,56 +297,27 @@
                 </div>
             </div>
                      
-
-
             
 
           
-            <div class="column is-one-third">
+
+          </div>
+
+          <div id="parrafo" class="columns is-multiline">
+            <div class="column is-full">
                 <div class="box has-text-centered">
-                  <p class="title is-5">Generos</p>
-                  <br>
-
-                  <figure class="highcharts-figure">
-                    <div id="containerGen"></div>
-                    <p class="highcharts-description">
-                        All color options in Highcharts can be defined as gradients or patterns.
-                        In this chart, a gradient fill is used for decorative effect in a pie
-                        chart.
-                    </p>
-                </figure>
-
-
-                  <p class="subtitle is-6" id="totUnidades">0.0</p>
-                    
+                    <figure class="highcharts-figure">
+                        <div id="graficaXmunicipio"></div>
+                    </figure>                    
                 </div>
             </div>
-
-
-
-
-            <div class="column is-one-third">
-              <div class="box has-text-centered">
-                <p class="title is-5">Ubicación</p>
-                <br>
-
-                <div id="containerXY"></div>
-
-
-                <p class="subtitle is-6" id="totUnidades">0.0</p>
-                  
-              </div>
-          </div>            
-
-
-
           </div>
 
 
 
+          
 
-
-              
+  
 
         </div>
         </div>
@@ -495,77 +534,205 @@ Highcharts.chart('containerGen', {
 
 
 function barras(){
-  Highcharts.chart('containerB', {
+Highcharts.chart('graficaXmunicipio', {
     chart: {
-        type: 'bar'
+        type: 'column'
     },
     title: {
-        text: 'Economia social'
+        text: 'Empresas sociales por municipio'
     },
     subtitle: {
-        text: 'Source: <a ' +
-            'href="https://en.wikipedia.org/wiki/List_of_continents_and_continental_subregions_by_population"' +
-            'target="_blank">Wikipedia.org</a>'
+        text: 'Source: SEDECO (2025)</a>'
     },
     xAxis: {
-        categories: ['Africa', 'America', 'Asia', 'Europe'],
-        title: {
-            text: null
-        },
-        gridLineWidth: 1,
-        lineWidth: 0
+        type: 'category',
+        labels: {
+            autoRotation: [-45, -90],
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Population (millions)',
-            align: 'high'
-        },
-        labels: {
-            overflow: 'justify'
-        },
-        gridLineWidth: 0
-    },
-    tooltip: {
-        valueSuffix: ' millions'
-    },
-    plotOptions: {
-        bar: {
-            borderRadius: '50%',
-            dataLabels: {
-                enabled: true
-            },
-            groupPadding: 0.1
+            text: '# empresas'
         }
     },
     legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: 80,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor:
-            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-        shadow: true
-    },
-    credits: {
         enabled: false
     },
+    tooltip: {
+        pointFormat: '# empresas: <b>{point.y:.1f}</b>'
+    },
     series: [{
-        name: 'Year 1990',
-        data: [632, 727, 3202, 721]
-    }, {
-        name: 'Year 2000',
-        data: [814, 841, 3714, 726]
-    }, {
-        name: 'Year 2021',
-        data: [1393, 1031, 4695, 745]
+        name: 'Population',
+        colors : [
+            "#9b20d9", "#9215ac", "#861ec9", "#7a17e6", "#7010f9", "#691af3",
+            "#6225ed", "#5b30e7", "#533be1", "#4c46db", "#4551d5", "#3e5ccf",
+            "#3667c9", "#2f72c3", "#277dbd", "#1f88b7", "#1693b1", "#0a9eaa",
+            "#03c69b", "#00f194", "#9b22d7", "#9420cd", "#8c1dc3", "#821bbb",
+            "#7818b2", "#7016aa", "#6813a2", "#60119a", "#580f92", "#500d8a",
+            "#480b82", "#40087a", "#380672", "#30046a", "#280262", "#20005a",
+            "#5803c3", "#5f05bc", "#6607b5", "#6d09ae", "#740ba7", "#7b0da0",
+            "#820f99", "#891192", "#90138b", "#971584", "#9e177d", "#a51976",
+            "#ac1b6f", "#b31d68", "#ba1f61", "#c1215a", "#c82353", "#cf253c",
+            "#d62735", "#dd292e", "#e42b27", "#eb2d20", "#f22f19", "#f93112",
+            "#ff330b", "#9003d1", "#8a07c9", "#840bbf", "#7e0fb7", "#7813ad",
+            "#7217a3", "#6c1b99", "#661f8f", "#602385", "#5a277b", "#542b71",
+            "#4e2f67", "#48335d", "#423753", "#3c3b49", "#363f3f", "#303335",
+            "#2a272b", "#9b25e1", "#9427db", "#8c29d5", "#842bcb", "#7b2dc3",
+            "#732fbb", "#6a31b3", "#6233ab", "#5935a3", "#50379b", "#483993",
+            "#3f3b8b", "#373d83", "#2e3f7b", "#263173", "#1d336b", "#153563",
+            "#0c375b", "#033953", "#003b4b", "#032745", "#05253f", "#072339",
+            "#092133", "#0b1f2d", "#0d1d27", "#0f1b21", "#11191b", "#131715",
+            "#14151A", "#1A1D25", "#202530", "#262D3B", "#2C3546", "#323D51",
+            "#38455C", "#3E4D67", "#445572", "#4A5D7D", "#506588", "#566D93",
+            "#5C759E", "#627DA9", "#6885B4", "#6E8DBF", "#7495CA"
+            ],
+        colorByPoint: true,
+        groupPadding: 0,
+        data: ordenarMunicipios(),
+        dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            inside: true,
+            verticalAlign: 'top',
+            format: '{point.y:.1f}', // one decimal
+            y: 10, // 10 pixels down from the top
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
     }]
-});  
+});
+
 }
 
+
+function ordenarMunicipios(){
+    const municipios=
+    [
+            ["Acambay de Ruiz Castañeda", 42],
+            ["Acolman", 87],
+            ["Aculco", 15],
+            ["Almoloya de Alquisiras", 63],
+            ["Almoloya de Juárez", 98],
+            ["Almoloya del Río", 23],
+            ["Amanalco", 74],
+            ["Amatepec", 56],
+            ["Amecameca", 31],
+            ["Apaxco", 90],
+            ["Atenco", 12],
+            ["Atizapán", 45],
+            ["Atizapán de Zaragoza", 67],
+            ["Atlacomulco", 81],
+            ["Atlautla", 39],
+            ["Axapusco", 99],
+            ["Ayapango", 27],
+            ["Calimaya", 58],
+            ["Capulhuac", 36],
+            ["Coacalco de Berriozábal", 71],
+            ["Coatepec Harinas", 49],
+            ["Cocotitlán", 88],
+            ["Coyotepec", 14],
+            ["Cuautitlán", 53],
+            ["Cuautitlán Izcalli", 95],
+            ["Chalco", 61],
+            ["Chapa de Mota", 20],
+            ["Chapultepec", 77],
+            ["Chiautla", 33],
+            ["Chicoloapan", 85],
+            ["Chiconcuac", 47],
+            ["Chimalhuacán", 92],
+            ["Donato Guerra", 30],
+            ["Ecatepec de Morelos", 100],
+            ["Ecatzingo", 41],
+            ["Huehuetoca", 66],
+            ["Hueypoxtla", 18],
+            ["Huixquilucan", 79],
+            ["Isidro Fabela", 25],
+            ["Ixtapaluca", 89],
+            ["Ixtapan de la Sal", 55],
+            ["Ixtapan del Oro", 37],
+            ["Ixtlahuaca", 83],
+            ["Xalatlaco", 50],
+            ["Jaltenco", 21],
+            ["Jilotepec", 72],
+            ["Jilotzingo", 44],
+            ["Jiquipilco", 97],
+            ["Jocotitlán", 60],
+            ["Joquicingo", 29],
+            ["Juchitepec", 84],
+            ["Lerma", 46],
+            ["Malinalco", 93],
+            ["Melchor Ocampo", 32],
+            ["Metepec", 78],
+            ["Mexicaltzingo", 19],
+            ["Morelos", 64],
+            ["Naucalpan de Juárez", 96],
+            ["Nextlalpan", 35],
+            ["Nezahualcóyotl", 86],
+            ["Nicolás Romero", 48],
+            ["Nopaltepec", 22],
+            ["Ocoyoacac", 70],
+            ["Ocuilan", 40],
+            ["El Oro", 82],
+            ["Otumba", 57],
+            ["Otzoloapan", 26],
+            ["Otzolotepec", 91],
+            ["Ozumba", 34],
+            ["Papalotla", 76],
+            ["La Paz", 16],
+            ["Polotitlán", 68],
+            ["Rayón", 43],
+            ["San Antonio la Isla", 75],
+            ["San Felipe del Progreso", 51],
+            ["San Martín de las Pirámides", 80],
+            ["San Mateo Atenco", 28],
+            ["San Simón de Guerrero", 62],
+            ["Santo Tomás", 17],
+            ["Soyaniquilpan de Juárez", 56],
+            ["Sultepec", 38],
+            ["Tecámac", 94],
+            ["Tejupilco", 59],
+            ["Temamatla", 24],
+            ["Temascalapa", 65],
+            ["Temascalcingo", 11],
+            ["Temascaltepec", 73],
+            ["Temoaya", 52],
+            ["Tenancingo", 69],
+            ["Tenango del Aire", 13],
+            ["Tenango del Valle", 54],
+            ["Teoloyucán", 31],
+            ["Teotihuacán", 88],
+            ["Tepetlaoxtoc", 42],
+            ["Tepetlixpa", 20],
+            ["Tepotzotlán", 77],
+            ["Tequixquiac", 90],
+            ["Texcaltitlán", 15],
+            ["Texcalyacac", 63],
+            ["Texcoco", 98],
+            ["Tezoyuca", 23],
+            ["Tianguistenco", 74],
+            ["Timilpan", 56],
+            ["Tlalmanalco", 31],
+            ["Tlalnepantla de Baz", 100],
+            ["Tlatlaya", 41],
+            ["Toluca", 66],
+            ["Tonatico", 18],
+            ["Tultepec", 79],
+            ["Tultitlán", 25],
+            ["Valle de Bravo", 89]
+    ]
+
+    // Ordenar por el segundo valor (númerico) de mayor a menor
+    return municipios.sort((a, b) => b[1] - a[1]);
+
+}
 
 function piramide(){
 // Custom template helper
@@ -578,7 +745,7 @@ const categories = [
     '80+'
 ];
 
-Highcharts.chart('container', {
+Highcharts.chart('piramide', {
     chart: {
         type: 'bar'
     },
