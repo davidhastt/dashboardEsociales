@@ -3,34 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Empresa Social</title>
+    <title>Registro</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> 
+ <style>
+ #map { height: 540px; }
+ </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="title">Registro de empresas sociales</h1>
+        <nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#"><img src="logo.png" alt="Logo" width="224" height="28"></a>
+        </div>
+        </nav>   
+        
+        <br>
+        <br>
+        <br>
+        
+        <label class="label">Registro de empresas sociales</label>
+
+        <p>Bienvenido (a): Este formulario busca recopilar información relevante sobre empresas sociales para promover su visibilidad, reconocer su labor y potenciar su impacto en las comunidades. Su participación es clave para valorar el rol transformador de estas iniciativas en el desarrollo económico, social y comunitario de los territorios.</p>
+        <br>
+        
+        <p>La información recopilada será tratada con estricta confidencialidad y utilizada exclusivamente con fines estadísticos, informativos y estratégicos. Los datos se integrarán a una plataforma digital interactiva (SIG) para facilitar el acceso a perfiles, recursos y redes colaborativas. No se emplearán con fines comerciales ni se divulgarán sin consentimiento. Todas las respuestas se analizarán de forma agregada, garantizando que los resultados reflejen tendencias generales sin comprometer la identidad de ninguna persona.</p>
+        <br>
         <form>
             <div class="field">
                 <label class="label">Nombre empresa social</label>
                 <div class="control">
                     <input class="input" type="text" placeholder="Ingrese el nombre">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">¿En qué región se encuentra ubicada su empresa?</label>
-                <div class="control">
-                    <div class="select">
-                        <select>
-                            <option>Oriente</option>
-                            <option>Nororiente</option>
-                            <option>Centro</option>
-                            <option>Norte</option>
-                            <option>Valle de Toluca</option>
-                            <option>Surteste</option>
-                            <option>Sur</option>
-                        </select>
-                    </div>
                 </div>
             </div>
 
@@ -169,18 +174,65 @@
                 </div>
             </div>
 
+
             <div class="field">
-                <label class="label">¿A qué sector productivo pertenece su empresa?</label>
+                <label class="label">Localidad</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Ingrese el nombre">
+                </div>
+            </div>            
+
+            <div class="field">
+                <label class="label">¿Cuál es la actvidad productiva de la empresa social?</label>
+                <div class="control">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Artesanias</label>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Agricola</label>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Pecuario</label>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Agroalimentos</label>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Turismo</label>                                                                                            
+                    </div>
+                </div>
+            </div>            
+
+            <div class="field">
+                <label class="label">¿En qué región se encuentra ubicada su empresa?</label>
                 <div class="control">
                     <div class="select">
                         <select>
-                            <option>Primario</option>
-                            <option>Secundario</option>
-                            <option>Terciario</option>
+                            <option>Oriente</option>
+                            <option>Nororiente</option>
+                            <option>Centro</option>
+                            <option>Norte</option>
+                            <option>Valle de Toluca</option>
+                            <option>Surteste</option>
+                            <option>Sur</option>
                         </select>
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="field">
+                <label class="label">¿A qué sector productivo pertenece su empresa social?</label>
+                <div class="control">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Primario (Agricultura, ganadería, pesca, silvicultura, minería).</label><br>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Secundario (Industria, manufactura, construcción, producción artesanal).</label><br>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Terciario (Comercio, turismo, servicios, educación, salud, transporte, tecnologías).</label>                                                                                           
+                    </div>
+                </div>
+            </div>
+
 
             <div class="field">
                 <label class="label">Número total de participantes en la empresa social</label>
@@ -211,27 +263,46 @@
             </div>
 
             <div class="field">
-                <label class="label">¿Dónde comercializa principalmente su empresa?</label>
+                <label class="label">Especifique el lugar o lugares de comercialización</label>
                 <div class="control">
                     <div class="select">
                         <select>
-                            <option>Local</option>
-                            <option>Nacional</option>
-                            <option>Internacional</option>
+                            <option>Local (Dentro de la comunidad o municipio)</option>
+                            <option>Nacional (En diferentes estados del país)</option>
+                            <option>Internacional (Exporta productos o servicios fuera del país)</option>
                         </select>
                     </div>
                 </div>
             </div>
+
 
             <div class="field">
                 <label class="label">Especifique el lugar o lugares de comercialización</label>
                 <div class="control">
                     <input class="input" type="text">
                 </div>
-            </div>
+            </div>            
 
             <div class="field">
-                <label class="label">¿Ha recibido su empresa alguna capacitación?</label>
+                <label class="label">¿Quiénes son los principales consumidores de su producto?</label>
+                <div class="control">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Infantes de 0 a 12 años.</label><br>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Adolescentes de 13 a 18 años.</label><br>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Personas de 19 a 59 años.</label><br>
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">Personas de 60 años en adelante.</label>                                                                                                                   
+                    </div>
+                </div>
+            </div>            
+
+
+
+            <div class="field">
+                <label class="label">¿Ha recibido su empresa alguna capacitación relacionada con su actividad empresarial?</label>
                 <div class="control">
                     <label class="radio">
                         <input type="radio" name="capacitacion" value="si"> Sí
@@ -243,7 +314,7 @@
             </div>
 
             <div class="field">
-                <label class="label">¿Le gustaría recibir capacitación?</label>
+                <label class="label">¿Le gustaría recibir alguna capacitación relacionada con su actividad productiva?</label>
                 <div class="control">
                     <label class="radio">
                         <input type="radio" name="recibir_capacitacion" value="si"> Sí
@@ -267,14 +338,44 @@
             </div>
 
             <div class="field">
-                <label class="label">Forma de contacto de su empresa</label>
+                <label class="label">¿Cuál es la forma de contacto de su empresa?</label>
                 <div class="control">
-                    <input class="input" type="text">
+                    <label class="radio">
+                        <input type="radio" name="figura_constitutiva" value="si"> Teléfono
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="figura_constitutiva" value="no"> Correo
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="figura_constitutiva" value="no"> Otro
+                    </label>                    
                 </div>
             </div>
 
             <div class="field">
+                <label class="label">¿Dónde se encuentra ubicada su empresa?</label>
+                <div class="control">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+
+            <div class="field">
+                <label class="label">¿Es su principal fuente de ingresos?</label>
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="autorizacion" value="si"> Sí
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="autorizacion" value="no"> No
+                    </label>
+                </div>
+            </div>            
+
+            <div class="field">
                 <label class="label">¿Autoriza el uso de sus datos?</label>
+                <p>La información recopilada será tratada con estricta confidencialidad y utilizada exclusivamente con fines estadísticos. Los datos personales no serán divulgados ni empleados para identificar a individuos, garantizando así la protección de la privacidad de los participantes. Todas las respuestas se analizarán de forma agregada, lo que asegura que los resultados solo reflejen tendencias generales sin comprometer la identidad de ninguna persona. Este compromiso con la seguridad y el uso responsable de la información responde a las normativas vigentes en materia de protección de datos</p>
+                <br>
                 <div class="control">
                     <label class="radio">
                         <input type="radio" name="autorizacion" value="si"> Sí
@@ -291,6 +392,27 @@
                 </div>
             </div>
         </form>
+
+
+        <div class="card">
+        <div class="card-header">
+            UAEMex
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Gobierno del estaado de México</h5>
+            <p class="card-text">Secretaria de Desarrollo Económico</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        </div>
+
     </div>
 </body>
+<script>
+var map = L.map('map').setView([19.285246933935852, -99.6590010955644], 13);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+</script>    
+
 </html>
